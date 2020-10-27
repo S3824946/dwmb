@@ -1,0 +1,40 @@
+package dwmb;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class dudewhere {
+	private static int MAX_TRANS = 100;
+	private static MoneyItem[] budget = new MoneyItem[MAX_TRANS];
+	private static int numTransactions = 0;
+
+	private static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+
+	}
+
+	private static void loadData() {
+		try {
+		Scanner fileScanner = new Scanner(new FileReader("budget.txt"));
+		int lineCount = 0;
+		while (fileScanner.hasNextLine()) {
+			String[] line = fileScanner.nextLine().split(":");
+			if (line[0].contentEquals("Income")) {
+				budget[numTransactions] = new Income(line);
+				numTransactions++;
+			} else if (line[0].contentEquals("Expense")) {
+				budget[numTransactions] = new Expense(line);
+				numTransactions++;
+			} else {
+				System.out.print("Line "+lineCount+" does not contain valid data!");
+			}
+		}
+	} catch (IOException e) {
+		
+	}
+	}
+}

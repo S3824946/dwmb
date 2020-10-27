@@ -1,0 +1,116 @@
+package dwmb;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class dudewhere {
+	private static int MAX_TRANS = 100;
+	private static MoneyItem[] budget = new MoneyItem[MAX_TRANS];
+	private static int numTransactions = 0;
+
+	private static Scanner sc = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		String selection;
+		loadData();
+		do {
+			System.out.println("Dude, Where's my Budget?");
+			System.out.println("Select from the following options:");
+			System.out.println("A) Add Income");
+			System.out.println("B) Add Expense");
+			System.out.println("C) View Totals");
+			System.out.println("X) Save and Exit");
+			
+			selection = sc.nextLine();
+			
+			switch(selection.toUpperCase()) {
+			case "A":
+				addIncome();
+				break;
+			case "B":
+				addExpense();
+				break;
+			case "C":
+				viewTotals();
+				break;
+			case "X":
+				System.out.print("Saving and exiting...");
+				break;
+			default:
+				System.out.print("Error - Invalid selection!");
+			}
+		} while (!selection.equalsIgnoreCase("X"));
+		saveData();
+		sc.close();
+	}
+
+	private static void loadData() {
+		try {
+		Scanner fileScanner = new Scanner(new FileReader("budget.txt"));
+		int lineCount = 0;
+		while (fileScanner.hasNextLine()) {
+			String[] line = fileScanner.nextLine().split(":");
+			if (line[0].contentEquals("Income")) {
+				budget[numTransactions] = new Income(line);
+				numTransactions++;
+			} else if (line[0].contentEquals("Expense")) {
+				budget[numTransactions] = new Expense(line);
+				numTransactions++;
+			} else {
+				System.out.print("Line "+lineCount+" does not contain valid data!");
+			}
+		}
+	} catch (IOException e) {
+		
+	}
+	}
+
+	private static void saveData() {
+		try {
+			PrintWriter pw = new PrintWriter(new FileWriter("budget.txt"));
+			for (int i=0; i < numTransactions; i++) {
+				budget[i].saveData(pw);
+			}
+		} catch (IOException e) {
+			System.out.print("Error - Could not write to file budget.txt");
+		}
+	}
+
+	private static void addIncome() {
+		System.out.println("Enter income amount:");
+		double amount = sc.nextDouble();
+		sc.nextLine();
+		System.out.println("Enter frequency of income:");
+		System.out.println("(W for Weekly, F for Fortnightly, M for Monthly, Q for Quarterly, A for Annually)");
+		String frequency = sc.nextLine();
+		System.out.println("Enter a label for this income:");
+		System.out.println("Work, Centrelink, etc.");
+		String label = sc.nextLine();
+		budget[numTransactions] = new Income(frequency, amount, label);
+		
+	}
+	private static void addExpense() {
+		System.out.println("Enter expense amount:");
+		double amount = sc.nextDouble();
+		sc.nextLine();
+		System.out.println("Enter frequency of expense:");
+		System.out.println("(W for Weekly, F for Fortnightly, M for Monthly, Q for Quarterly, A for Annually)");
+		String frequency = sc.nextLine();
+		System.out.println("Enter a category for this expense:");
+		System.out.println("(Financial, Utilities, Property, etc");
+		String category = sc.nextLine();
+		System.out.println("Enter a label for this expense:");
+		System.out.println("(phone bill, food, fuel, etc.)");
+		String label = sc.nextLine();
+		budget[numTransactions] = new Expense(frequency, amount, label, category);
+		
+	}
+	private static void viewTotals() {
+		
+	}
+
+
+}

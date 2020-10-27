@@ -1,0 +1,16 @@
+package dwmb;
+
+public class Expense extends MoneyItem {
+	protected String category;
+
+	public Expense(String[] file) {
+		super(file);
+		this.category = file[4];
+	}
+
+	public Expense(String frequency, double amount, String label, String category) {
+		super(frequency, amount, label);
+		this.category = category;
+	}
+
+}

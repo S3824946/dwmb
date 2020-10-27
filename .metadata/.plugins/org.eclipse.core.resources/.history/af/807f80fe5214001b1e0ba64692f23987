@@ -1,0 +1,49 @@
+package dwmb;
+
+public abstract class MoneyItem {
+	protected String frequency;
+	protected int freqMulti;
+	protected double amount;
+	protected String label;
+	
+	//Constructor for new Object from main program
+	public MoneyItem(String frequency, double amount, String label) {
+		this.frequency = frequency;
+		switch(frequency.toUpperCase()) {
+		case "W":
+			freqMulti = 52;
+			break;
+		case "F":
+			freqMulti = 26;
+			break;
+		case "M":
+			freqMulti = 12;
+			break;
+		case "Q":
+			freqMulti = 4;
+			break;
+		case "A":
+			freqMulti = 1;
+		}
+		this.amount = amount;
+		this.label = label;
+		
+	}
+	
+	public String getFreq() {
+		return frequency;
+	}
+	
+	public double getAmt() {
+		return amount;
+	}
+	
+	public String getLabel () {
+		return label;
+	}
+	
+	public void displayItem () {
+		
+	}
+
+}

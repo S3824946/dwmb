@@ -1,0 +1,15 @@
+package dwmb;
+
+public class Expense extends MoneyItem {
+
+	public Expense(String[] file) {
+		super(file);
+		// TODO Auto-generated constructor stub
+	}
+
+	public Expense(String frequency, double amount, String label) {
+		super(frequency, amount, label);
+		// TODO Auto-generated constructor stub
+	}
+
+}
