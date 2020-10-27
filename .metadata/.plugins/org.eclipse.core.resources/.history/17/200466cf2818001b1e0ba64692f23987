@@ -92,7 +92,7 @@ public class dudewhere {
 		System.out.println("Work, Centrelink, etc.");
 		String label = sc.nextLine();
 		budget[numTransactions] = new Income(frequency, amount, label);
-		numTransactions++;
+
 	}
 
 	private static void addExpense() {
@@ -109,13 +109,11 @@ public class dudewhere {
 		System.out.println("(phone bill, food, fuel, etc.)");
 		String label = sc.nextLine();
 		budget[numTransactions] = new Expense(frequency, amount, label, category);
-		numTransactions++;
+
 	}
 
 	private static void viewTotals() {
-		for (int i = 0; i < numTransactions; i++) {
-			budget[i].displayItem();
-		}
+
 	}
 
 }
