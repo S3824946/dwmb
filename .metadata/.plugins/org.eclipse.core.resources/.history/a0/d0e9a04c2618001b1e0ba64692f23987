@@ -23,10 +23,10 @@ public class dudewhere {
 			System.out.println("B) Add Expense");
 			System.out.println("C) View Totals");
 			System.out.println("X) Save and Exit");
-
+			
 			selection = sc.nextLine();
-
-			switch (selection.toUpperCase()) {
+			
+			switch(selection.toUpperCase()) {
 			case "A":
 				addIncome();
 				break;
@@ -49,36 +49,34 @@ public class dudewhere {
 
 	private static void loadData() {
 		try {
-			Scanner fileScanner = new Scanner(new FileReader("budget.txt"));
-			int lineCount = 0;
-			while (fileScanner.hasNextLine()) {
-				String[] line = fileScanner.nextLine().split(":");
-				if (line[0].contentEquals("Income")) {
-					budget[numTransactions] = new Income(line);
-					numTransactions++;
-				} else if (line[0].contentEquals("Expense")) {
-					budget[numTransactions] = new Expense(line);
-					numTransactions++;
-				} else {
-					System.out.print("Line " + lineCount + " does not contain valid data!");
-				}
+		Scanner fileScanner = new Scanner(new FileReader("budget.txt"));
+		int lineCount = 0;
+		while (fileScanner.hasNextLine()) {
+			String[] line = fileScanner.nextLine().split(":");
+			if (line[0].contentEquals("Income")) {
+				budget[numTransactions] = new Income(line);
+				numTransactions++;
+			} else if (line[0].contentEquals("Expense")) {
+				budget[numTransactions] = new Expense(line);
+				numTransactions++;
+			} else {
+				System.out.print("Line "+lineCount+" does not contain valid data!");
 			}
-		} catch (IOException e) {
-
 		}
+	} catch (IOException e) {
+		
+	}
 	}
 
 	private static void saveData() {
 		try {
 			PrintWriter pw = new PrintWriter(new FileWriter("budget.txt"));
-			for (int i = 0; i < numTransactions; i++) {
+			for (int i=0; i < numTransactions; i++) {
 				budget[i].saveData(pw);
 			}
-			pw.close();
 		} catch (IOException e) {
 			System.out.print("Error - Could not write to file budget.txt");
 		}
-
 	}
 
 	private static void addIncome() {
@@ -92,7 +90,7 @@ public class dudewhere {
 		System.out.println("Work, Centrelink, etc.");
 		String label = sc.nextLine();
 		budget[numTransactions] = new Income(frequency, amount, label);
-
+		
 	}
 
 	private static void addExpense() {
@@ -109,11 +107,12 @@ public class dudewhere {
 		System.out.println("(phone bill, food, fuel, etc.)");
 		String label = sc.nextLine();
 		budget[numTransactions] = new Expense(frequency, amount, label, category);
-
+		
 	}
 
 	private static void viewTotals() {
-
+		
 	}
+
 
 }
