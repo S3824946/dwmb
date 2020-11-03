@@ -122,47 +122,36 @@ public class dudewhere {
 		int freqOutNum = freqCheck(freqOut);
 		for (int i = 0; i < numTransactions; i++) {
 			budget[i].displayItem();
-			String freqIn = budget[i].getFreq();
-			int freqInNum = freqCheck(freqIn);
-			double freqCalc = freqCalc(freqInNum, freqOutNum, budget[i].getAmt());
 			if (budget[i].getType().contentEquals("Income")) {
-				inTotal += freqCalc;
+				inTotal += budget[i].getAmt();
 			} else if (budget[i].getType().contentEquals("Expense")) {
-				exTotal += freqCalc;
+				exTotal += budget[i].getAmt();
 			}
 		}
 		remaining = inTotal - exTotal;
-		System.out.println("Total income: $" + String.format("%.2f", inTotal));
-		System.out.println("Total Expenses: $" + String.format("%.2f", exTotal));
-		System.out.println("Remaining after expenses: $" + String.format("%.2f", remaining));
+		System.out.println("Total income: $" + inTotal);
+		System.out.println("Total Expenses: $" + exTotal);
+		System.out.println("Remaining after expenses: $" + remaining);
 	}
 
 	private static int freqCheck(String in) {
-		int result = 1;
-		switch (in.toUpperCase()) {
-		case "W":
+		int result = 0;
+		switch(in) {
+		case"W":
 			result = 52;
 			return result;
-		case "F":
+		case"F":
 			result = 26;
 			return result;
-		case "M":
+		case"M":
 			result = 12;
 			return result;
-		case "Q":
+		case"Q":
 			result = 4;
 			return result;
-		case "A":
+		case"A":
 			result = 1;
-			return result;
-		default:
-			return result;
+			return result;	
 		}
-	}
-
-	private static double freqCalc(int freqIn, int freqOut, double amount) {
-		amount = (amount * freqIn);
-		amount = (amount / freqOut);
-		return amount;
 	}
 }

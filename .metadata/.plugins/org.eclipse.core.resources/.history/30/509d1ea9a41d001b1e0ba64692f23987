@@ -45,7 +45,7 @@ public abstract class MoneyItem {
 	public void displayItem() {
 		String type = this.getClass().getSimpleName();
 		System.out.println("Type of Transaction: " + type);
-		System.out.println("Amount: $" + String.format("%.2f", amount));
+		System.out.println("Amount: $" +String.format("%.2f", amount));
 		System.out.println("Label: " + label);
 		switch (frequency.toUpperCase()) {
 		case "W":

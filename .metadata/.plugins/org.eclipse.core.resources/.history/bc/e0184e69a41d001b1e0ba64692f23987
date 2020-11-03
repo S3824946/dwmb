@@ -161,8 +161,8 @@ public class dudewhere {
 	}
 
 	private static double freqCalc(int freqIn, int freqOut, double amount) {
-		amount = (amount * freqIn);
-		amount = (amount / freqOut);
-		return amount;
+		double multi = (amount * freqIn);
+		double divide = (multi / freqOut);
+		return divide;
 	}
 }

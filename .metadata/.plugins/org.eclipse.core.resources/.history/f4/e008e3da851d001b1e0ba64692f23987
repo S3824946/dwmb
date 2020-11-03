@@ -113,56 +113,9 @@ public class dudewhere {
 	}
 
 	private static void viewTotals() {
-		double inTotal = 0;
-		double exTotal = 0;
-		double remaining = 0;
-		System.out.println("What frequency would you like the totals to be shown in?");
-		System.out.println("(W for Weekly, F for Fortnightly, M for Monthly, Q for Quarterly, A for Annually)");
-		String freqOut = sc.nextLine();
-		int freqOutNum = freqCheck(freqOut);
 		for (int i = 0; i < numTransactions; i++) {
 			budget[i].displayItem();
-			String freqIn = budget[i].getFreq();
-			int freqInNum = freqCheck(freqIn);
-			double freqCalc = freqCalc(freqInNum, freqOutNum, budget[i].getAmt());
-			if (budget[i].getType().contentEquals("Income")) {
-				inTotal += freqCalc;
-			} else if (budget[i].getType().contentEquals("Expense")) {
-				exTotal += freqCalc;
-			}
-		}
-		remaining = inTotal - exTotal;
-		System.out.println("Total income: $" + String.format("%.2f", inTotal));
-		System.out.println("Total Expenses: $" + String.format("%.2f", exTotal));
-		System.out.println("Remaining after expenses: $" + String.format("%.2f", remaining));
-	}
-
-	private static int freqCheck(String in) {
-		int result = 1;
-		switch (in.toUpperCase()) {
-		case "W":
-			result = 52;
-			return result;
-		case "F":
-			result = 26;
-			return result;
-		case "M":
-			result = 12;
-			return result;
-		case "Q":
-			result = 4;
-			return result;
-		case "A":
-			result = 1;
-			return result;
-		default:
-			return result;
 		}
 	}
 
-	private static double freqCalc(int freqIn, int freqOut, double amount) {
-		amount = (amount * freqIn);
-		amount = (amount / freqOut);
-		return amount;
-	}
 }

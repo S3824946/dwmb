@@ -1,1 +1,6 @@
-Income:f:1000.0:work:
+Income:w:1000.0:work
+Income:m:300.0:commission
+Expense:m:20.0:Mobile:Utilities
+Expense:w:150.0:food:groceries
+Expense:w:250.0:Rent:Utilities
+Expense:a:960.0:Rego:vehicle
